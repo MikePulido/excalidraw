@@ -98,6 +98,9 @@ describe("contextMenu element", () => {
     ];
 
     expect(contextMenu).not.toBeNull();
+    expect(
+      contextMenu?.querySelector('li[data-testid="duplicateSelection"]'),
+    ).toBeNull();
     expectedShortcutNames.forEach((shortcutName) => {
       expect(
         contextMenu?.querySelector(`li[data-testid="${shortcutName}"]`),
@@ -122,30 +125,29 @@ describe("contextMenu element", () => {
       "cut",
       "copy",
       "paste",
+      "duplicateSelection",
       "wrapSelectionInFrame",
       "copyStyles",
       "pasteStyles",
-      "deleteSelectedElements",
       "addToLibrary",
-      "flipHorizontal",
-      "flipVertical",
       "sendBackward",
       "bringForward",
       "sendToBack",
       "bringToFront",
-      "duplicateSelection",
+      "flipHorizontal",
+      "flipVertical",
       "hyperlink",
       "copyElementLink",
       "toggleElementLock",
+      "deleteSelectedElements",
     ];
 
     expect(contextMenu).not.toBeNull();
-    expect(contextMenuOptions?.length).toBe(expectedContextMenuItems.length);
-    expectedContextMenuItems.forEach((item) => {
-      expect(
-        contextMenu?.querySelector(`li[data-testid="${item}"]`),
-      ).not.toBeNull();
-    });
+    expect(
+      Array.from(contextMenuOptions ?? [], (item) =>
+        item.getAttribute("data-testid"),
+      ),
+    ).toEqual(expectedContextMenuItems);
   });
 
   it("shows context menu for element", () => {
@@ -216,29 +218,28 @@ describe("contextMenu element", () => {
       "cut",
       "copy",
       "paste",
+      "duplicateSelection",
       "wrapSelectionInFrame",
       "copyStyles",
       "pasteStyles",
-      "deleteSelectedElements",
       "group",
       "addToLibrary",
-      "flipHorizontal",
-      "flipVertical",
       "sendBackward",
       "bringForward",
       "sendToBack",
       "bringToFront",
-      "duplicateSelection",
+      "flipHorizontal",
+      "flipVertical",
       "toggleElementLock",
+      "deleteSelectedElements",
     ];
 
     expect(contextMenu).not.toBeNull();
-    expect(contextMenuOptions?.length).toBe(expectedShortcutNames.length);
-    expectedShortcutNames.forEach((shortcutName) => {
-      expect(
-        contextMenu?.querySelector(`li[data-testid="${shortcutName}"]`),
-      ).not.toBeNull();
-    });
+    expect(
+      Array.from(contextMenuOptions ?? [], (item) =>
+        item.getAttribute("data-testid"),
+      ),
+    ).toEqual(expectedShortcutNames);
   });
 
   it("shows 'Ungroup selection' in context menu for group inside selected elements", () => {
@@ -273,30 +274,29 @@ describe("contextMenu element", () => {
       "cut",
       "copy",
       "paste",
+      "duplicateSelection",
       "wrapSelectionInFrame",
       "copyStyles",
       "pasteStyles",
-      "deleteSelectedElements",
-      "copyElementLink",
       "ungroup",
       "addToLibrary",
-      "flipHorizontal",
-      "flipVertical",
       "sendBackward",
       "bringForward",
       "sendToBack",
       "bringToFront",
-      "duplicateSelection",
+      "flipHorizontal",
+      "flipVertical",
+      "copyElementLink",
       "toggleElementLock",
+      "deleteSelectedElements",
     ];
 
     expect(contextMenu).not.toBeNull();
-    expect(contextMenuOptions?.length).toBe(expectedContextMenuItems.length);
-    expectedContextMenuItems.forEach((item) => {
-      expect(
-        contextMenu?.querySelector(`li[data-testid="${item}"]`),
-      ).not.toBeNull();
-    });
+    expect(
+      Array.from(contextMenuOptions ?? [], (item) =>
+        item.getAttribute("data-testid"),
+      ),
+    ).toEqual(expectedContextMenuItems);
   });
 
   it("selecting 'Copy styles' in context menu copies styles", () => {
